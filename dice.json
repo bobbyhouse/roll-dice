@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "id": "dice",
+  "name": "dice",
+  "servers": [
+    {
+      "type": "image",
+      "secrets": "default",
+      "image": "roberthouse224/mcp-dice:latest@sha256:b30a4431b6e177daa9035f7946f1c8c643ad676e44084eb66f7920262a9c1644",
+      "snapshot": {
+        "server": {
+          "name": "roll-dice",
+          "type": "server",
+          "image": "",
+          "description": "MCP server for rolling dice - generates random numbers between 1 and 6",
+          "title": "Roll Dice",
+          "remote": {},
+          "tools": [
+            {
+              "name": "roll",
+              "description": "Generate a random number between 1 - 6",
+              "container": {
+                "image": "",
+                "command": null,
+                "volumes": null
+              },
+              "parameters": {
+                "type": "",
+                "properties": null,
+                "required": null
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "secrets": {
+    "default": {
+      "provider": "docker-desktop-store"
+    }
+  }
+}

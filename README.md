@@ -108,24 +108,23 @@ docker push ghcr.io/YOUR_GITHUB_USERNAME/roll-dice:latest
 ### 5. Update YAML File
 Edit `mcp-dice-ghcr.yaml` and replace `ghcr.io/bobbyhouse/roll-dice:latest` with your image reference.
 
-### 6. Create Catalog from File
+### 6. Create Catalog with Servers
 ```bash
-docker mcp catalog-next create my-dice-catalog --title "My Dice Catalog" --server file://mcp-dice-ghcr.yaml
-```
+# With just roll-dice
+docker mcp catalog-next create ghcr.io/YOUR_GITHUB_USERNAME/my-dice-catalog --title "My Dice Catalog" --server file://mcp-dice-ghcr.yaml
 
-### 7. Add Additional Server (Optional)
-```bash
-docker mcp catalog-next add-server my-dice-catalog --server catalog://mcp/docker-mcp-catalog/fetch
+# Or with multiple servers (optional - demonstrates policy enforcement)
+docker mcp catalog-next create ghcr.io/YOUR_GITHUB_USERNAME/my-dice-catalog --title "My Dice Catalog" --server file://mcp-dice-ghcr.yaml --server catalog://mcp/docker-mcp-catalog/fetch
 ```
 
 ### 8. Push Catalog to GHCR
 ```bash
-docker mcp catalog-next push my-dice-catalog --registry ghcr.io/YOUR_GITHUB_USERNAME/my-dice-catalog
+docker mcp catalog-next push ghcr.io/YOUR_GITHUB_USERNAME/my-dice-catalog
 ```
 
 ### 9. Delete Local Catalog
 ```bash
-docker mcp catalog-next delete my-dice-catalog
+docker mcp catalog-next delete ghcr.io/YOUR_GITHUB_USERNAME/my-dice-catalog
 ```
 
 ### 10. Pull Catalog from GHCR
@@ -136,10 +135,10 @@ docker mcp catalog-next pull ghcr.io/YOUR_GITHUB_USERNAME/my-dice-catalog
 ### 11. Create Profile with Catalog Servers
 ```bash
 # With just roll-dice
-docker mcp profile create my-profile --server catalog://my-dice-catalog/roll-dice
+docker mcp profile create --name my-profile --server catalog://my-dice-catalog/roll-dice
 
 # With optional fetch server (demonstrates policy enforcement)
-docker mcp profile create my-profile --server catalog://my-dice-catalog/roll-dice --server catalog://my-dice-catalog/fetch
+docker mcp profile create --name my-profile --server catalog://my-dice-catalog/roll-dice --server catalog://my-dice-catalog/fetch
 ```
 
 ### 12. Run Gateway with Profile

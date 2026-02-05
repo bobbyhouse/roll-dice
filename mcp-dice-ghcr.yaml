@@ -1,0 +1,28 @@
+name: roll-dice
+title: Roll Dice
+type: server
+image: ghcr.io/bobbyhouse/roll-dice:latest
+description: An mcp server that can roll a dice for you
+tools:
+  - name: roll
+    description: Generate a random number between 1 and configured dice sides
+    arguments: []
+    annotations:
+      idempotentHint: false
+  - name: another_roll
+    description: Generate a random number between 1 and configured dice sides
+    arguments: []
+    annotations:
+      idempotentHint: false
+config:
+  - name: dice_config
+    type: object
+    description: Configuration for dice rolling behavior
+    properties:
+      dice_sides:
+        type: integer
+        description: Number of sides on the dice (default is 6)
+        default: 6
+env:
+  - name: DICE_SIDES
+    value: "{{roll-dice.dice_sides}}"

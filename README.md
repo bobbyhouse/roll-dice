@@ -122,9 +122,9 @@ docker mcp catalog-next create ghcr.io/YOUR_GITHUB_USERNAME/my-dice-catalog --ti
 docker mcp catalog-next push ghcr.io/YOUR_GITHUB_USERNAME/my-dice-catalog
 ```
 
-### 9. Delete Local Catalog
+### 9. Remove Local Catalog
 ```bash
-docker mcp catalog-next delete ghcr.io/YOUR_GITHUB_USERNAME/my-dice-catalog
+docker mcp catalog-next remove ghcr.io/YOUR_GITHUB_USERNAME/my-dice-catalog
 ```
 
 ### 10. Pull Catalog from GHCR

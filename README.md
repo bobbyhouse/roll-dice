@@ -135,10 +135,10 @@ docker mcp catalog-next pull ghcr.io/YOUR_GITHUB_USERNAME/my-dice-catalog
 ### 11. Create Profile with Catalog Servers
 ```bash
 # With just roll-dice
-docker mcp profile create --name my-profile --server catalog://my-dice-catalog/roll-dice
+docker mcp profile create --name my-profile --server catalog://ghcr.io/YOUR_GITHUB_USERNAME/my-dice-catalog/roll-dice
 
 # With optional fetch server (demonstrates policy enforcement)
-docker mcp profile create --name my-profile --server catalog://my-dice-catalog/roll-dice --server catalog://my-dice-catalog/fetch
+docker mcp profile create --name my-profile --server catalog://ghcr.io/YOUR_GITHUB_USERNAME/my-dice-catalog/roll-dice --server catalog://ghcr.io/YOUR_GITHUB_USERNAME/my-dice-catalog/fetch
 ```
 
 ### 12. Run Gateway with Profile

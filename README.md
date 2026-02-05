@@ -24,10 +24,10 @@ The `build.sh` script builds a Docker image with embedded metadata in an image l
 ./build.sh
 ```
 
-When using a self-configured image, you can add the server to the catalog using an OCI reference with the `docker://` protocol:
+When using a self-configured image, you can create a catalog using an OCI reference with the `docker://` protocol:
 
 ```bash
-docker mcp gateway run --server docker://roberthouse224/roll-dice:latest
+docker mcp catalog-next create my-catalog --title "My Dice Server" --server docker://roberthouse224/roll-dice:latest
 ```
 
 The metadata is embedded in the `io.docker.server.metadata` label during the build process, making the image completely self-describing.
@@ -47,7 +47,7 @@ For details on the YAML file format and server entry specification, see the [ser
 This file demonstrates how to reference an image stored on Docker Hub:
 
 ```bash
-docker mcp gateway run --server file://mcp-dice-docker.yaml
+docker mcp catalog-next create my-catalog --title "My Dice Server" --server file://mcp-dice-docker.yaml
 ```
 
 The YAML file specifies:
@@ -63,7 +63,7 @@ The YAML file specifies:
 This file demonstrates how to reference an image stored on GitHub Container Registry (GHCR):
 
 ```bash
-docker mcp gateway run --server file://mcp-dice-ghcr.yaml
+docker mcp catalog-next create my-catalog --title "My Dice Server" --server file://mcp-dice-ghcr.yaml
 ```
 
 The YAML file specifies:

@@ -82,9 +82,77 @@ dice_sides: 6  # Number of sides on the dice (default: 6)
 
 This configuration is passed to the container via the `DICE_SIDES` environment variable.
 
+## Complete Workflow: Creating and Publishing a Custom Catalog
+
+This workflow demonstrates building, publishing, and using a custom catalog with GHCR.
+
+### 1. Create GitHub Personal Access Token (PAT)
+Create a PAT with `write:packages` and `read:packages` permissions at https://github.com/settings/tokens
+
+### 2. Login to GHCR
+```bash
+docker login ghcr.io -u YOUR_GITHUB_USERNAME
+# Enter your PAT when prompted for password
+```
+
+### 3. Build Image with GHCR Tag
+```bash
+docker build -t ghcr.io/YOUR_GITHUB_USERNAME/roll-dice:latest .
+```
+
+### 4. Push Image to GHCR
+```bash
+docker push ghcr.io/YOUR_GITHUB_USERNAME/roll-dice:latest
+```
+
+### 5. Update YAML File
+Edit `mcp-dice-ghcr.yaml` and replace `ghcr.io/bobbyhouse/roll-dice:latest` with your image reference.
+
+### 6. Create Catalog from File
+```bash
+docker mcp catalog-next create my-dice-catalog --title "My Dice Catalog" --server file://mcp-dice-ghcr.yaml
+```
+
+### 7. Add Additional Server (Optional)
+```bash
+docker mcp catalog-next add-server my-dice-catalog --server catalog://mcp/docker-mcp-catalog/fetch
+```
+
+### 8. Push Catalog to GHCR
+```bash
+docker mcp catalog-next push my-dice-catalog --registry ghcr.io/YOUR_GITHUB_USERNAME/my-dice-catalog
+```
+
+### 9. Delete Local Catalog
+```bash
+docker mcp catalog-next delete my-dice-catalog
+```
+
+### 10. Pull Catalog from GHCR
+```bash
+docker mcp catalog-next pull ghcr.io/YOUR_GITHUB_USERNAME/my-dice-catalog
+```
+
+### 11. Create Profile with Catalog Servers
+```bash
+# With just roll-dice
+docker mcp profile create my-profile --server catalog://my-dice-catalog/roll-dice
+
+# With optional fetch server (demonstrates policy enforcement)
+docker mcp profile create my-profile --server catalog://my-dice-catalog/roll-dice --server catalog://my-dice-catalog/fetch
+```
+
+### 12. Run Gateway with Profile
+```bash
+docker mcp gateway run --profile my-profile
+```
+
+### 13. Verify in Client
+Launch your MCP client and verify the `roll` and `another_roll` tools are available.
+
 ## Creating Catalogs
 
-To create your own catalog with MCP servers, see the [creating catalogs documentation](https://github.com/docker/mcp-gateway/blob/main/docs/profiles.md#creating-catalogs).
+For more details on creating catalogs, see the [creating catalogs documentation](https://github.com/docker/mcp-gateway/blob/main/docs/profiles.md#creating-catalogs).
 
 ## Learn More
 

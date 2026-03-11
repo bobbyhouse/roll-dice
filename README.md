@@ -1,6 +1,9 @@
 # MCP Dice Server
 
-An MCP (Model Context Protocol) server that provides dice rolling functionality with configurable dice sides.
+This repo is used to demonstrate the [Profile](https://docs.docker.com/ai/mcp-catalog-and-toolkit/profiles/) and [Custom Catalog](https://docs.docker.com/ai/mcp-catalog-and-toolkit/catalog/#custom-catalogs) features of the Docker MCP Gateway. For more information about the entire Docker MCP ecosystem see [Docker MCP Toolkit and Catalog](https://docs.docker.com/ai/mcp-catalog-and-toolkit/). 
+
+## Roll Dice
+The MCP server used in this example rolls dice. The number of sides is configurable.
 
 ## Overview
 
@@ -32,25 +35,7 @@ The YAML file specifies:
 - Configuration schema
 - Environment variable mappings
 
-#### GitHub Container Registry Image
-
-**File:** `mcp-dice-ghcr.yaml`
-
-This file demonstrates how to reference an image stored on GitHub Container Registry (GHCR):
-
-```bash
-docker mcp catalog-next create my-catalog --title "My Dice Server" --server file://mcp-dice-ghcr.yaml
-```
-
-The YAML file specifies:
-- Image location: `ghcr.io/bobbyhouse/roll-dice:latest` (GHCR)
-- Tool definitions
-- Configuration schema
-- Environment variable mappings
-
 ## Configuration
-
-All three deployment methods support the same configuration:
 
 ```yaml
 dice_sides: 6  # Number of sides on the dice (default: 6)
@@ -58,7 +43,7 @@ dice_sides: 6  # Number of sides on the dice (default: 6)
 
 This configuration is passed to the container via the `DICE_SIDES` environment variable.
 
-## Complete Workflow: Creating and Publishing a Custom Catalog
+## Example: Creating and Publishing a Custom Catalog (GHCR)
 
 This workflow demonstrates building, publishing, and using a custom catalog with GHCR.
 
@@ -127,10 +112,10 @@ Launch your MCP client and verify the `roll` and `another_roll` tools are availa
 
 ## Creating Catalogs
 
-For more details on creating catalogs, see the [creating catalogs documentation](https://github.com/docker/mcp-gateway/blob/main/docs/profiles.md#creating-catalogs).
+For more details on creating catalogs, see [Custom Catalogs]([https://github.com/docker/mcp-gateway/blob/main/docs/profiles.md#creating-catalogs](https://docs.docker.com/ai/mcp-catalog-and-toolkit/catalog/#custom-catalogs).
 
 ## Learn More
-
+- [Docker MCP Toolkit and Catalog](https://docs.docker.com/ai/mcp-catalog-and-toolkit/)
 - [Self-configured images](https://github.com/docker/mcp-gateway/blob/main/docs/self-configured.md)
 - [Server entry specification](https://github.com/docker/mcp-gateway/blob/main/docs/server-entry-spec.md)
 - [Creating catalogs](https://github.com/docker/mcp-gateway/blob/main/docs/profiles.md#creating-catalogs)

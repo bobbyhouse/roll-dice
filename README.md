@@ -10,30 +10,6 @@ This server provides two tools:
 
 The number of dice sides is configurable via the `DICE_SIDES` environment variable (defaults to 6).
 
-## Deployment Options
-
-This project demonstrates different approaches to deploying containerized MCP servers in the catalog.
-
-### Self-Configured Image with Embedded Metadata
-
-**File:** `build.sh`
-
-The `build.sh` script builds a Docker image with embedded metadata in an image label. This creates a "self-configured" image that contains all the information needed for the catalog without requiring a separate metadata file.
-
-```bash
-./build.sh
-```
-
-When using a self-configured image, you can create a catalog using an OCI reference with the `docker://` protocol:
-
-```bash
-docker mcp catalog-next create my-catalog --title "My Dice Server" --server docker://roberthouse224/roll-dice:latest
-```
-
-The metadata is embedded in the `io.docker.server.metadata` label during the build process, making the image completely self-describing.
-
-For more information about self-configured images, see the [self-configured documentation](https://github.com/docker/mcp-gateway/blob/main/docs/self-configured.md).
-
 ### External Metadata Files
 
 If your image doesn't have the special metadata label, you can provide the metadata from a separate YAML file using the `file://` protocol.

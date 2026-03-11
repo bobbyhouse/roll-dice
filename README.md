@@ -12,7 +12,7 @@ The number of dice sides is configurable via the `DICE_SIDES` environment variab
 
 ### External Metadata Files
 
-If your image doesn't have the special metadata label, you can provide the metadata from a separate YAML file using the `file://` protocol.
+You can provide server metadata from a separate YAML file using the `file://` protocol.
 
 For details on the YAML file format and server entry specification, see the [server entry spec documentation](https://github.com/docker/mcp-gateway/blob/main/docs/server-entry-spec.md).
 
